@@ -1,5 +1,6 @@
-from functools import reduce
-
+"""
+UserBlueprint
+"""
 from flask import Blueprint, request, jsonify
 
 user_blueprint = Blueprint('users', __name__)
@@ -37,14 +38,3 @@ def list_users():
     ]
     return jsonify(formatted_users)
 
-
-def user_review_summary(filtered_books):
-    users_with_reviews = list(
-        filter(lambda user: any(user['username'] == r['username'] for book in filtered_books for r in book['reviews']),
-               users))
-    usernames = list(map(lambda user: user['username'], users_with_reviews))
-    review_count = reduce(lambda acc, user: acc + sum(1 for book in filtered_books for r in book['reviews']
-                                                      if r['username'] == user['username']), users_with_reviews, 0)
-
-    print("Benutzer mit Rezensionen:", usernames)
-    print("Gesamtanzahl der Rezensionen:", review_count)
