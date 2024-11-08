@@ -1,6 +1,6 @@
 from flask import Flask
-from blueprints.userBlueprint import user_blueprint
-from blueprints.bookBlueprint import book_blueprint
+from userBlueprint import user_blueprint
+from bookBlueprint import book_blueprint
 
 app = Flask(__name__)
 
